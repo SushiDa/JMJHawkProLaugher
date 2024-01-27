@@ -99,6 +99,7 @@ public struct Trick
 
 public enum PlayerDirection
 {
+    UNKNOWN,
     FRONT,
     BACK,
     FOOT,
