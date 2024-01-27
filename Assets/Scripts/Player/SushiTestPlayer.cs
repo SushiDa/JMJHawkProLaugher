@@ -33,4 +33,14 @@ public class SushiTestPlayer : MonoBehaviour
     {
         InputMovement = value.Get<float>();
     }
+
+    internal void ChangeAnimation(string animation)
+    {
+
+    }
+
+    internal PlayerDirection GetCurrentDirection()
+    {
+        return PlayerDirection.FOOT;
+    }
 }

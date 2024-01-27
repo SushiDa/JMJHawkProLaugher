@@ -31,6 +31,7 @@ public class WaveManager : MonoBehaviour
     private void NewWave()
     {
         WaveNumber++;
+        WaveStarted = false;
         //TODO timer en fonction de la wave courante
         CurrentWaveTimer = WaveStartTimer;
     }

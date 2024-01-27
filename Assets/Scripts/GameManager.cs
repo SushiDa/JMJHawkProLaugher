@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private GameState State = GameState.INTRO;
     private void Awake()
     {
         GameEvents.IntroEnd += StartWaveIntro;
@@ -23,8 +24,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        State = GameState.INTRO;
         // PlayMusicHere
-        if(GameEvents.IntroStart != null)
+        if (GameEvents.IntroStart != null)
         {
             GameEvents.IntroStart();
         }
@@ -36,19 +38,23 @@ public class GameManager : MonoBehaviour
 
     private void StartWaveIntro()
     {
+        if (State != GameState.INTRO) return;
+        State = GameState.WAVEINTRO;
         GameEvents.NewWave?.Invoke();
         if (GameEvents.WaveIntroStart != null)
         {
-            GameEvents.EditItemStart();
+            GameEvents.WaveIntroStart();
         }
         else
         {
-            StartWave();
+            StartEditMode();
         }
     }
 
     private void StartEditMode()
     {
+        if (State != GameState.WAVEINTRO) return;
+        State = GameState.EDIT;
         if (GameEvents.EditItemStart != null)
         {
             GameEvents.EditItemStart();
@@ -61,19 +67,38 @@ public class GameManager : MonoBehaviour
 
     private void StartWave()
     {
+        if (State != GameState.EDIT) return;
+        State = GameState.GAMING;
         GameEvents.WaveStart?.Invoke();
     }
 
     private void CheckGameEnded(bool success)
     {
-        if(success)
+        Debug.Log(State);
+        if (State != GameState.GAMING) return;
+
+        Debug.Log("COUCOU " + success);
+        if (success)
         {
+            State = GameState.INTRO;
             // Display
             StartWaveIntro();
         }
         else
         {
+            State = GameState.GAMEOVER;
             GameEvents.GameOver?.Invoke();
         }
     }
+
+    private enum GameState
+    {
+        INTRO,
+        WAVEINTRO,
+        EDIT,
+        GAMING,
+        GAMEOVER
+    }
 }
+
+
