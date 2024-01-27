@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public static class GameEvents
 {
@@ -17,6 +14,6 @@ public static class GameEvents
     internal static Action GameOver;
 
     internal static Action PlayerInteract;
-    internal static Action<int,int, float, Trick> ScoreBonus; // score, multiplier, timeBonus, Trick
+    internal static Action<int, int, float, Trick> ScoreBonus; // score, multiplier, timeBonus, Trick
     internal static Action ComboBreak;
 }

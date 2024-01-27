@@ -16,6 +16,16 @@ public class PlayerInputHub : MonoBehaviour
 
 
 
+    private PlayerInputWrapper playerInputWrapper;
+    public PlayerInputWrapper PlayerInputWrapper { 
+        get {
+            if (playerInputWrapper == null) playerInputWrapper = FindObjectOfType<PlayerInputWrapper>(includeInactive: true);
+            return playerInputWrapper;
+        }
+    }
+
+
+
 
     private Vector2 cursorMovement = Vector2.zero;
     public Vector2 CursorMovement { 
