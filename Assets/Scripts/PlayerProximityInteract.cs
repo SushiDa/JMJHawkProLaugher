@@ -59,9 +59,9 @@ public class PlayerProximityInteract : MonoBehaviour
         {
             CancelActiveItem(false, ItemCancelTypes.INTERACT);
 
-            if(currentHover != null);
+            if(currentHover != null)
             {
-                //CancelActiveItem(true, ItemCancelTypes.INTERACT);
+                CancelActiveItem(true, ItemCancelTypes.INTERACT);
                 currentHover.Interact(_player);
                 if(currentHover.IsActive)
                     activeItem = currentHover;

@@ -16,16 +16,16 @@ public class SushiTestPlayer : MonoBehaviour
 
     float InputMovement;
 
-    internal Rigidbody rigidbody { get; private set; }
+    internal Rigidbody rb { get; private set; }
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
         if(!MovementLocked)
-            rigidbody.velocity = Vector3.right * InputMovement * Speed;
+            rb.velocity = Vector3.right * InputMovement * Speed;
     }
 
     private void OnMove(InputValue value)
