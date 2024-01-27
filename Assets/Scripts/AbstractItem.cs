@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 public abstract class AbstractItem : MonoBehaviour
 {
-    [SerializeField] List<ItemCancelTypes> AvailableCancelActions;
+    [SerializeField] private List<ItemCancelTypes> AvailableCancelActions;
+    [SerializeField] private string SFXOnInteract;
 
     [SerializeField] internal int MultiplierBonus;
     [SerializeField] internal int PerfectMultiplierBonus;
@@ -37,6 +38,7 @@ public abstract class AbstractItem : MonoBehaviour
             InteractingPlayer = player;
             bool interacting = InteractImpl();
             if (!interacting) CancelUse(); // if simple interaction, immediately cancel
+            AudioBridge.PlaySFX(SFXOnInteract);
             return interacting;
         }
         return false;
