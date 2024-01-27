@@ -28,7 +28,7 @@ public class Banana : AbstractItem
             InteractingPlayer.InteractLocked = true;
             InteractingPlayer.JumpLocked = false;
             // Le perso glisse en avant
-            InteractingPlayer.rigidbody.velocity = Vector3.right * SlideSpeed * Mathf.Sign(InteractingPlayer.GetComponent<Rigidbody>().velocity.x);
+            InteractingPlayer.rb.velocity = Vector3.right * SlideSpeed * Mathf.Sign(InteractingPlayer.GetComponent<Rigidbody>().velocity.x);
             return true;
         }
         return false;
