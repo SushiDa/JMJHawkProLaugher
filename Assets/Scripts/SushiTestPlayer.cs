@@ -14,18 +14,22 @@ public class SushiTestPlayer : MonoBehaviour
     internal bool JumpLocked;
     internal bool InteractLocked;
 
-    Rigidbody _rb;
+    float InputMovement;
+
+    internal Rigidbody rigidbody { get; private set; }
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if(!MovementLocked)
+            rigidbody.velocity = Vector3.right * InputMovement * Speed;
     }
 
     private void OnMove(InputValue value)
     {
-        if (!MovementLocked)
-        {
-            float movement = value.Get<float>();
-            _rb.velocity = Vector3.right * movement * Speed;
-        }
+        InputMovement = value.Get<float>();
     }
 }

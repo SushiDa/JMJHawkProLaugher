@@ -5,12 +5,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerProximityInteract : MonoBehaviour
 {
-    private List<AbstractItem> _interactables;
+    private List<AbstractItem> _interactables = new List<AbstractItem>();
+    private SushiTestPlayer _player;
 
     AbstractItem currentHover;
+    AbstractItem activeItem;
+
     private void Awake()
     {
-        _interactables = new List<AbstractItem>();
+        _player = GetComponent<SushiTestPlayer>();
     }
 
     private void Update()
@@ -21,7 +24,7 @@ public class PlayerProximityInteract : MonoBehaviour
         foreach(var interact in _interactables)
         {
             float distance = Vector3.Distance(transform.position, interact.transform.position);
-            if (distance < closestDistance && !interact.triggered) hover = interact;
+            if (distance < closestDistance && !interact.Triggered) hover = interact;
         }
 
         if (hover != null && currentHover != hover)
@@ -52,9 +55,38 @@ public class PlayerProximityInteract : MonoBehaviour
 
     private void OnInteract(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && !_player.InteractLocked)
         {
-            currentHover?.Interact(gameObject);
+            CancelActiveItem(false, ItemCancelTypes.INTERACT);
+
+            if(currentHover != null);
+            {
+                //CancelActiveItem(true, ItemCancelTypes.INTERACT);
+                currentHover.Interact(_player);
+                if(currentHover.IsActive)
+                    activeItem = currentHover;
+            }
+        }
+    }
+
+    private void OnJump(InputValue value)
+    {
+        if(value.isPressed && !_player.JumpLocked)
+        {
+            CancelActiveItem(false, ItemCancelTypes.JUMP);
+        }
+    }
+
+    private void CancelActiveItem(bool force, ItemCancelTypes cancelType)
+    {
+        if (activeItem != null && activeItem.IsActive && (force || activeItem.IsCancellable(cancelType)))
+        {
+            activeItem.CancelUse();
+            activeItem = null;
+        }
+        else if(force)
+        {
+            activeItem = null;
         }
     }
 }
