@@ -3,10 +3,6 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class PlayerInputHub : MonoBehaviour
 {
-    [SerializeField]
-    private GroundDetector groundDetector;
-
-
     private bool canMove = true;
     public bool CanMove { 
         set { canMove = value; }
@@ -94,10 +90,15 @@ public class PlayerInputHub : MonoBehaviour
         private get { return isGrounded; }
     }
 
+    private GroundDetector GroundDetector => FindObjectOfType<GroundDetector>(includeInactive: true);
     public bool ReadIsGrounded(bool purge = false)
     {
         bool value = IsGrounded;
-        if (!value) return groundDetector.IsGrounded;
+        if (!value) {
+            GroundDetector groundDetector = GroundDetector;
+            if (groundDetector == null) return false;
+            return groundDetector.IsGrounded;
+        }        
         if (purge) IsGrounded = false;
         return isGrounded;
     }
