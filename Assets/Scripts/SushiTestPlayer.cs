@@ -20,6 +20,7 @@ public class SushiTestPlayer : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        AudioBridge.PlayMusic("Music/MusicLoop", 150, 32);
     }
 
     private void Update()
