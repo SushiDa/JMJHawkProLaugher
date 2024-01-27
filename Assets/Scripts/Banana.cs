@@ -9,9 +9,6 @@ public class Banana : AbstractItem
     [SerializeField] private Vector2 SlidePerfectTiming;
 
     private float currentSlideTimer;
-    private bool sliding;
-
-    private GameObject CurrentInteracting;
 
     private void Awake()
     {
@@ -19,73 +16,57 @@ public class Banana : AbstractItem
         initialParent = transform.parent;
     }
 
-    internal override bool Interact(GameObject source)
+    protected override bool InteractImpl()
     {
-        if(source != null && !triggered)
+        if(InteractingPlayer != null)
         {
-            triggered = true;
-            CurrentInteracting = source;
             GetComponent<MeshRenderer>().material.color = Color.red;
-            var player = source.GetComponent<SushiTestPlayer>();
-            transform.parent = player.FootTransform;
+            transform.parent = InteractingPlayer.FootTransform;
             transform.localPosition = Vector3.zero;
             
-            player.MovementLocked = true;
-            player.InteractLocked = true;
-            player.JumpLocked = false;
+            InteractingPlayer.MovementLocked = true;
+            InteractingPlayer.InteractLocked = true;
+            InteractingPlayer.JumpLocked = false;
             // Le perso glisse en avant
-            player.GetComponent<Rigidbody>().velocity = Vector3.right * SlideSpeed * Mathf.Sign(player.GetComponent<Rigidbody>().velocity.x);
-
-            sliding = true;
+            InteractingPlayer.rb.velocity = Vector3.right * SlideSpeed * Mathf.Sign(InteractingPlayer.GetComponent<Rigidbody>().velocity.x);
             return true;
         }
-
         return false;
     }
 
     private void Update()
     {
-        if(sliding && currentSlideTimer < SlideDuration)
+        if(IsActive && currentSlideTimer < SlideDuration)
         {
             currentSlideTimer += Time.deltaTime;
             if(currentSlideTimer >= SlideDuration)
             {
-                Cancel();
+                CancelUse();
             }
         }
     }
 
-    private void Cancel()
+    protected override void CancelImpl()
     {
-        sliding = false;
         GetComponent<MeshRenderer>().enabled = false;
 
-        if (CurrentInteracting != null)
+        if (InteractingPlayer != null)
         {
-            var player = CurrentInteracting.GetComponent<SushiTestPlayer>();
-            player.MovementLocked = false;
-            player.InteractLocked = false;
-            player.JumpLocked = false;
+            InteractingPlayer.MovementLocked = false;
+            InteractingPlayer.InteractLocked = false;
+            InteractingPlayer.JumpLocked = false;
         }
-
-        CurrentInteracting = null;
     }
 
-    internal override void ResetImpl()
+    protected override void ResetImpl()
     {
         GetComponent<MeshRenderer>().material.color = Color.white;
         GetComponent<MeshRenderer>().enabled = true;
-        CurrentInteracting = null;
-        sliding = false;
         currentSlideTimer = 0;
     }
-    internal override void HoverImpl(bool hovering)
-    {
-        if(!triggered) GetComponent<MeshRenderer>().material.color = hovering ? Color.yellow : Color.white;
-    }
 
-    private void OnTriggerExit(Collider other)
+    protected override void HoverImpl(bool hovering)
     {
-        // Le perso tombe
+        GetComponent<MeshRenderer>().material.color = hovering ? Color.yellow : Color.white;
     }
 }
