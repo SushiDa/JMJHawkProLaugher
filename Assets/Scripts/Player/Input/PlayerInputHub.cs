@@ -89,7 +89,7 @@ public class PlayerInputHub : MonoBehaviour
 
 
     private bool isGrounded = false;
-    public bool IsGrounded { 
+    public bool IsGrounded {
         set { isGrounded = value; }
         private get { return isGrounded; }
     }

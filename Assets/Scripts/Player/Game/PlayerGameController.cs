@@ -19,33 +19,21 @@ public class PlayerGameController : MonoBehaviour
     [SerializeField]
     private float jumpforce = 1.5f;
     [SerializeField]
-    private float fallMassMultiplier = 1.5f;
+    private float fallMinVelocity = 0f;
+    [SerializeField]
+    private float fallForce = 1.5f;
 
     private bool isFalling = true;
 
 
 
 
-    void Update()
-    {
-        Interact();
-    }
-
     void FixedUpdate()
     {
-        FallGravityCorrection();
+        FallCorrection();
         JumpFixed();
         RotateFixed();
         MoveFixed();
-    }
-
-
-
-
-    private void Interact()
-    {
-        bool isInteract = inputHub.ReadInteract();
-        // TODO
     }
 
 
@@ -65,13 +53,8 @@ public class PlayerGameController : MonoBehaviour
         bool isJump = inputHub.ReadJump();
         if (!isJump) return;
 
-        // Apply player gravity correction
-        Vector3 velocity = rigidbody.velocity;
-        velocity.y = 0f;
-        rigidbody.velocity = velocity;
-        FallGravityCorrection();
-
-        // Apply Jump Force
+        // Override Vertical Velocity + Apply Jump Force
+        OverrideVerticalVelocity(0f);
         rigidbody.AddForce(fixedOrientator.up * jumpforce, ForceMode.Impulse);
     }
 
@@ -110,11 +93,23 @@ public class PlayerGameController : MonoBehaviour
 
 
 
-    private void FallGravityCorrection()
+    private void OverrideVerticalVelocity(float value)
     {
-        bool wasFalling = isFalling;
-        isFalling = rigidbody.velocity.y < 0f;
-        if (!wasFalling && isFalling) rigidbody.mass *= fallMassMultiplier;
-        else if (wasFalling && !isFalling) rigidbody.mass /= fallMassMultiplier;
+        // Override Velocity + Apply fall correction
+        Vector3 velocity = rigidbody.velocity;
+        velocity.y = value;
+        rigidbody.velocity = velocity;
+        FallCorrection();
+    }
+
+    private void FallCorrection()
+    {
+        // Verify and apply additional gravity
+        bool isGrounded = inputHub.ReadIsGrounded();
+        isFalling = rigidbody.velocity.y < fallMinVelocity;
+        if (isFalling && !isGrounded) {
+            Vector3 gravityForce = -fixedOrientator.up * fallForce;
+            rigidbody.AddForce(gravityForce, ForceMode.Force);
+        }
     }
 }
