@@ -1,7 +1,5 @@
 using UnityEngine;
 
-// TODO : Ajouter une gestion des animations ici
-
 [DisallowMultipleComponent]
 public class PlayerInputHub : MonoBehaviour
 {
