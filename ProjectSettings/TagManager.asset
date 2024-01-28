@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FixedOrientator
   - FxTemporaire
+  - Public
   layers:
   - Default
   - TransparentFX
