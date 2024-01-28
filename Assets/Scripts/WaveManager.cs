@@ -87,7 +87,7 @@ public class WaveManager : MonoBehaviour
             }
 
             // Calculate position + Instantiate round circle
-            Vector2 circlePosition = new Vector2(Random.value, Random.value);
+            Vector2 circlePosition = new Vector2(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.5f));
             Vector3 refPosition = Camera.WorldToViewportPoint(circleSpawnReference.position);
             Vector3 viewPosition = new Vector3(circlePosition.x, circlePosition.y, refPosition.z);
             Vector3 resultPosition = Camera.ViewportToWorldPoint(viewPosition);

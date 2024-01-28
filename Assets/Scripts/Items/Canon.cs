@@ -42,7 +42,7 @@ public class Canon : AbstractItem
                 
                 //Create projectile and add speed
                 GameObject tarte = Instantiate(projectile, transform.position, Quaternion.identity);
-                tarte.GetComponent<Rigidbody>().velocity = transform.rotation * new Vector3(-10, 10, 0);
+                tarte.GetComponent<Rigidbody>().velocity = transform.rotation * new Vector3(-10, 10, 0) * 3f;
                 tarte.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.up, Vector3.left);
                 Destroy(gameObject, 2.0f);
             }
