@@ -60,7 +60,7 @@ public class WaveManager : MonoBehaviour
         foreach (var spawner in FindObjectsOfType<ItemPreview>(true)) spawner.gameObject.SetActive(true);
         foreach (var item in FindObjectsOfType<AbstractItem>(true)) Destroy(item.gameObject);
 
-        var player = FindObjectOfType<PlayerGameController>(true);
+        player = FindObjectOfType<PlayerGameController>(true);
         if(player != null) Destroy(player.gameObject);
 
         //TODO timer en fonction de la wave courante
