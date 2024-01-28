@@ -56,7 +56,7 @@ public abstract class AbstractItem : MonoBehaviour
         InteractingPlayer?.GetComponent<PlayerProximityInteract>()?.RemoveActiveItem(this);
         InteractingPlayer = null;
     }
-    protected abstract void InteractImpl(); // return true if item is held active
+    protected virtual void InteractImpl() { }
     protected virtual void ResetImpl() { }
     protected virtual void CancelImpl() { }
 

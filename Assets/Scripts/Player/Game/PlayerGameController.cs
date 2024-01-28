@@ -113,7 +113,7 @@ public class PlayerGameController : MonoBehaviour
 
         // Calculate + Apply movement
         float inputMove = InputHub.ReadMovement();
-        float speededMove = inputMove * moveSpeed * Time.fixedDeltaTime;
+        float speededMove = inputMove * moveSpeed;
         Vector3 orientedVelocity = FixedOrientator.worldToLocalMatrix.MultiplyVector(rigidbody.velocity);
         orientedVelocity.x = speededMove;
         rigidbody.velocity = FixedOrientator.localToWorldMatrix.MultiplyVector(orientedVelocity);

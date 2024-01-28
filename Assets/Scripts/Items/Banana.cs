@@ -59,7 +59,7 @@ public class Banana : AbstractItem
                         ItemSource = ItemCategory,
                         IsSuperTrick = true
                     };
-                    GameEvents.ScoreBonus?.Invoke(PointBonus, MultiplierBonus, InteractTimeBonus, supertrick);
+                    GameEvents.ScoreBonus?.Invoke(PerfectPointBonus, PerfectMultiplierBonus, InteractTimeBonus, supertrick);
                     break;
                 default:
 
