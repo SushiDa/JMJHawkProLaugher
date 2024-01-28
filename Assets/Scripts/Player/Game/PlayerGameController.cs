@@ -29,6 +29,7 @@ public class PlayerGameController : MonoBehaviour
     public Animator animator;
     public Transform armature;
     private Quaternion eulerRotation;
+    private AnimatorClipInfo[] clipInfo;
 
     private PlayerInputHub inputHub;
     public PlayerInputHub InputHub { 
@@ -65,6 +66,10 @@ public class PlayerGameController : MonoBehaviour
         JumpFixed();
         RotateFixed();
         MoveFixed();
+        //Dégeu
+        int jumpState = animator.GetInteger("JumpingState");
+        //if(jumpState == 1)
+            //animator.SetInteger("JumpingState", 2);
     }
 
 
@@ -88,7 +93,9 @@ public class PlayerGameController : MonoBehaviour
         OverrideVerticalVelocity(0f);
         rigidbody.AddForce(FixedOrientator.up * jumpforce, ForceMode.Impulse);
         GameEvents.PlayerJump?.Invoke();
+        //#plusRienAFoutre
         animator.SetInteger("JumpingState", 1);
+        animator.CrossFadeNicely("Armature|Jumpascend 0", 0);
     }
 
 
@@ -163,6 +170,13 @@ public class PlayerGameController : MonoBehaviour
         {
             animator.SetInteger("JumpingState", 0);
         }
+    }
+
+    public string GetCurrentClipName()
+    {
+        int layerIndex = 0;
+        clipInfo = animator.GetCurrentAnimatorClipInfo(layerIndex);
+        return clipInfo[0].clip.name;
     }
 
 }

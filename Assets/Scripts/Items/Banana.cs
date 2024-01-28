@@ -39,7 +39,8 @@ public class Banana : AbstractItem
             InteractingPlayer.rigidbody.velocity = InteractingPlayer.FixedOrientator.right * SlideSpeed * Mathf.Sign(InteractingPlayer.GetComponent<Rigidbody>().velocity.x);
             InteractingPlayer.rigidbody.MoveRotation(Quaternion.identity);
             // ChangeAnimSlide
-            switch(InteractingPlayer.InputHub.ReadPlayerDirection())
+            InteractingPlayer.animator.SetBool("ZwipBanana", true);
+            switch (InteractingPlayer.InputHub.ReadPlayerDirection())
             {
                 case PlayerDirection.FOOT:
                     // Normal stuff
@@ -86,7 +87,8 @@ public class Banana : AbstractItem
     {
         NormalBanana.SetActive(false);
         SqaushedBanana.SetActive(false);
-
+        Destroy(gameObject, 1);
+        InteractingPlayer.animator.SetBool("ZwipBanana", false);
         if (InteractingPlayer != null)
         {
             InteractingPlayer.InputHub.CanMove = true;
