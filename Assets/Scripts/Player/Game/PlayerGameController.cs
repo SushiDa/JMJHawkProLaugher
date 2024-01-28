@@ -67,10 +67,6 @@ public class PlayerGameController : MonoBehaviour
         JumpFixed();
         RotateFixed();
         MoveFixed();
-        //D�geu
-        int jumpState = animator.GetInteger("JumpingState");
-        //if(jumpState == 1)
-            //animator.SetInteger("JumpingState", 2);
     }
 
 
