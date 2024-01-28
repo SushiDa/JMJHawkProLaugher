@@ -336,8 +336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e740c36a39f008e49a40f8f918ce2459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  rotationSpeed: 10
+  moveSpeed: 15
+  rotationSpeed: 500
   jumpforce: 12
   fallMinVelocity: 9.5
   fallForce: 100
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd903fa5ff257d24aaa090078a0f35a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 8222810822961792238}
 --- !u!114 &3236374944988900104
 MonoBehaviour:
   m_ObjectHideFlags: 0

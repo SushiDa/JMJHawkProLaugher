@@ -37,7 +37,7 @@
                     "type": "Value",
                     "id": "64a1b244-2924-4f14-8b56-88875302710f",
                     "expectedControlType": "Axis",
-                    "processors": "",
+                    "processors": "Invert",
                     "interactions": "",
                     "initialStateCheck": true
                 }
@@ -323,7 +323,7 @@
                     "type": "Value",
                     "id": "63f9f286-1717-493c-9821-aa2c0518682d",
                     "expectedControlType": "Axis",
-                    "processors": "",
+                    "processors": "Invert",
                     "interactions": "",
                     "initialStateCheck": true
                 }

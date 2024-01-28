@@ -28,7 +28,7 @@ public class PlayerGameController : MonoBehaviour
     //Deso moi je code pas aussi beau
     public Animator animator;
     public Transform armature;
-    private Quaternion eulerRotation;
+    private float previousMovement = 0f;
 
     private PlayerInputHub inputHub;
     public PlayerInputHub InputHub { 
@@ -72,6 +72,10 @@ public class PlayerGameController : MonoBehaviour
 
     private void JumpFixed()
     {
+        // Verify wanted to jump
+        bool isJump = InputHub.ReadJump();
+        if (!isJump) return;
+
         // Check if hub allow Jumping
         bool canJump = InputHub.ReadCanJump();
         if (!canJump) return;
@@ -79,10 +83,6 @@ public class PlayerGameController : MonoBehaviour
         // Check if Hub says player is grounded
         bool isGrounded = InputHub.ReadIsGrounded(purge: true);
         if (!isGrounded) return;
-
-        // Verify wanted to jump
-        bool isJump = InputHub.ReadJump();
-        if (!isJump) return;
 
         // Override Vertical Velocity + Apply Jump Force
         OverrideVerticalVelocity(0f);
@@ -103,8 +103,7 @@ public class PlayerGameController : MonoBehaviour
         // Calculate + Apply rotation
         float inputRotation = InputHub.ReadRotation();
         float speededRotation = inputRotation * rotationSpeed * Time.fixedDeltaTime;
-        Quaternion rotation = Quaternion.AngleAxis(speededRotation, FixedOrientator.forward);
-        rigidbody.MoveRotation(rigidbody.rotation * rotation);
+        transform.Rotate(FixedOrientator.forward * speededRotation, Space.World);
     }
 
 
@@ -122,20 +121,14 @@ public class PlayerGameController : MonoBehaviour
         Vector3 orientedVelocity = FixedOrientator.worldToLocalMatrix.MultiplyVector(rigidbody.velocity);
         orientedVelocity.x = speededMove;
         rigidbody.velocity = FixedOrientator.localToWorldMatrix.MultiplyVector(orientedVelocity);
-        if (inputMove != 0)
-        {
+
+        // Calculate Animation / Rotation Things and apply them
+        if (!Mathf.Approximately(speededMove, 0f)) {
+            bool directionChanged = Mathf.Sign(previousMovement) != Mathf.Sign(speededMove);
+            if (directionChanged) transform.Rotate(0f, 180f, 0f);
+            previousMovement = speededMove;
             animator.SetBool("isMoving", true);
-            if (inputMove < 0) { 
-                eulerRotation = Quaternion.Euler(0, 180, 0);
-                transform.rotation = eulerRotation;
-            }
-            else if (inputMove > 0){
-                eulerRotation = Quaternion.Euler(0, 0, 0);
-                transform.rotation = eulerRotation;
-            }
-        }
-        else
-            animator.SetBool("isMoving", false);
+        } else animator.SetBool("isMoving", false);
     }
 
 
@@ -158,11 +151,6 @@ public class PlayerGameController : MonoBehaviour
         if (!isGrounded && isFalling) {
             Vector3 gravityForce = -FixedOrientator.up * fallForce;
             rigidbody.AddForce(gravityForce, ForceMode.Force);
-        }
-        else
-        {
-            animator.SetInteger("JumpingState", 0);
-        }
+        } else animator.SetInteger("JumpingState", 0);
     }
-
 }
