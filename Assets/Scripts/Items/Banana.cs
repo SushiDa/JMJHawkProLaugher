@@ -49,6 +49,8 @@ public class Banana : AbstractItem
             InteractingPlayer.animator.SetBool("ZwipBanana", true);
             if(foule != null)
                 foule.publicEnDelire();
+            else
+                Debug.Log("Pas De Foule");
 
             switch (InteractingPlayer.InputHub.ReadPlayerDirection())
             {
