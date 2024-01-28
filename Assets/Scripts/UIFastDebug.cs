@@ -6,26 +6,22 @@ using UnityEngine;
 public class UIFastDebug : MonoBehaviour
 {
     // Start is called before the first frame update
-    TMP_Text DebugText;
-    WaveManager wave;
+    [SerializeField]
+    private TextMeshProUGUI scoretext;
+    [SerializeField]
+    private TextMeshProUGUI Combotext;
     PlayerScoring player;
-    PlayerGameController playerCtrl;
 
-    private void Awake()
+
+
+    private void Start()
     {
-        DebugText = GetComponent<TMP_Text>();
-        wave = FindObjectOfType<WaveManager>(true);
-        player = FindObjectOfType<PlayerScoring>(true);
-        playerCtrl = FindObjectOfType<PlayerGameController>(true);
+        player = FindAnyObjectByType<PlayerScoring>();
     }
 
     private void Update()
     {
-        player = FindObjectOfType<PlayerScoring>(true);
-        playerCtrl = FindObjectOfType<PlayerGameController>(true);
-        if (player != null)
-            DebugText.text = "Score : " + player.CurrentScore.ToString("000") + " | " + player.CurrentTricks.Count + " tricks<br>Combo : x" + player.CurrentMultiplier.ToString("0") + " | " + player.CurrentComboTimer.ToString("0.0") + "s<br>Wave : " + wave.WaveNumber + " | " + wave.CurrentWaveTimer + "s<br> yVelocity : " + playerCtrl.rigidbody.velocity.y.ToString("0.00");
-        else
-            DebugText.text = "";
+        scoretext.text = player.CurrentScore.ToString("000");
+        Combotext.text = player.CurrentMultiplier.ToString("0");
     }
 }
