@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc1142b3914776429b85a7a68d6a886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 1
   editActionMap: EditMode
   gameActionMap: General
   editGlobalRoot: {fileID: 1321199506942261894}
@@ -284,7 +285,7 @@ MonoBehaviour:
   objectsMappings:
   - id: 0
     uiObject: {fileID: 0}
-    graphicPrefab: {fileID: 6520461308299301979, guid: c5ab0fdcd18f3034d847961d56823446,
+    graphicPrefab: {fileID: 2730534889815923725, guid: 6aaa73da7cdf76e4daab0cc8eb02c932,
       type: 3}
     uiPrefab: {fileID: 3867891204845361139, guid: 3f6acfcd377dc864fb03443df58c1908,
       type: 3}

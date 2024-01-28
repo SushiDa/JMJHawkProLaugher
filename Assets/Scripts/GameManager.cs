@@ -76,10 +76,8 @@ public class GameManager : MonoBehaviour
 
     private void CheckGameEnded(bool success)
     {
-        Debug.Log(State);
         if (State != GameState.GAMING) return;
 
-        Debug.Log("COUCOU " + success);
         if (success)
         {
             State = GameState.INTRO;
