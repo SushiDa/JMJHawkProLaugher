@@ -22,6 +22,7 @@ public class Bouton : AbstractItem
         if (InteractingPlayer != null && LinkedItem != null)
         {
             LinkedItem.Interact(InteractingPlayer);
+            Destroy(gameObject, 1.0f);
         }
     }
     void Update()
