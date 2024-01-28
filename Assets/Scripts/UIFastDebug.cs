@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -21,7 +19,9 @@ public class UIFastDebug : MonoBehaviour
 
     private void Update()
     {
-        scoretext.text = player.CurrentScore.ToString("000");
-        Combotext.text = player.CurrentMultiplier.ToString("0");
+        try {
+            scoretext.text = player.CurrentScore.ToString("000");
+            Combotext.text = player.CurrentMultiplier.ToString("0");
+        } catch { }
     }
 }

@@ -125,8 +125,8 @@ public class PlayerPlaceController : MonoBehaviour
     private void MoveCursor()
     {
         // Check if Hub allow Moving
-        bool canMove = InputHub.ReadCanMove();
-        if (!canMove) return;
+        //bool canMove = InputHub.ReadCanMove();
+        //if (!canMove) return;
 
         // Calculate Screen relative movement
         Vector2 inputMove = InputHub.ReadCursorMovement();

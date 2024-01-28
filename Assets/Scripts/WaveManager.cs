@@ -70,7 +70,6 @@ public class WaveManager : MonoBehaviour
     private void StartWave()
     {
         // Coroutine de départ ici
-        WaveStarted = true;
 
         // Spawn Player
         var player = Instantiate<PlayerGameController>(PlayerPrefab, PlayerSpawnPosition.position, PlayerSpawnPosition.rotation);
@@ -115,6 +114,7 @@ public class WaveManager : MonoBehaviour
         PromptText.text = "1";
         yield return new WaitForSeconds(.5f);
         PromptText.text = "GO !";
+        WaveStarted = true;
 
         var player = FindObjectOfType<PlayerGameController>(true);
         player.InputHub.CanMove = true;
