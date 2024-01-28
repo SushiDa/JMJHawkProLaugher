@@ -8,6 +8,7 @@ public class Canon : AbstractItem
 
     private float shotDelayTimer;
     private bool isFiring = false;
+    private bool fireAnim = false;
 
     internal override bool CanInteractImpl(PlayerGameController player)
     {
@@ -23,16 +24,22 @@ public class Canon : AbstractItem
     void Update()
     {
         
-        if (isFiring && shotDelayTimer < 1) 
+        if (isFiring) 
         {
+            if (!fireAnim && shotDelayTimer >= 0.5f)
+            {
+                fireAnim = true;
+                //Animation du tir
+                GetComponentInChildren<Animator>().SetBool("Fire", true);
+            }
             shotDelayTimer += Time.deltaTime;
             if (shotDelayTimer >= 1) 
             {
                 isFiring = false;
                 shotDelayTimer = 0;
                 AudioBridge.PlaySFX("Canon");
-                //Animation du tir
-                GetComponentInChildren<Animator>().SetBool("Fire", true);
+                
+                
                 //Create projectile and add speed
                 GameObject tarte = Instantiate(projectile, transform.position, Quaternion.identity);
                 tarte.GetComponent<Rigidbody>().velocity = new Vector3(-10, 10, 0);
