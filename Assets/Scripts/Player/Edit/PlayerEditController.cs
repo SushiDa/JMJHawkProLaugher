@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(PlayerPlaceController))]
@@ -133,7 +132,6 @@ public class PlayerEditController : MonoBehaviour
             // Instantiate Mapping UI Button, and assign him his ID
             GameObject uiObject = Instantiate(currentMappings[i].uiPrefab, chooseUIRoot);
             uiObject.GetComponent<ChooseObjectButton>().ID = currentMappings[i].id;
-            if (i == 0) EventSystem.current.SetSelectedGameObject(uiObject);
             currentMappings[i].uiObject = uiObject;
         }
     }
