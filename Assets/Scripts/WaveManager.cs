@@ -51,16 +51,16 @@ public class WaveManager : MonoBehaviour
         WaveNumber++;
         WaveStarted = false;
 
-        var player = FindObjectOfType<PlayerGameController>(true);
-        player.InputHub.CanMove = true;
-        player.InputHub.CanJump = true;
-        player.InputHub.CanRotate = true;
+        var playerInput = FindObjectOfType<PlayerInputHub>(true);
+        playerInput.CanMove = true;
+        playerInput.CanJump = true;
+        playerInput.CanRotate = true;
 
         // Spawn all items
         foreach (var spawner in FindObjectsOfType<ItemPreview>(true)) spawner.gameObject.SetActive(true);
         foreach (var item in FindObjectsOfType<AbstractItem>(true)) Destroy(item.gameObject);
 
-        player = FindObjectOfType<PlayerGameController>(true);
+        var player = FindObjectOfType<PlayerGameController>(true);
         if(player != null) Destroy(player.gameObject);
 
         //TODO timer en fonction de la wave courante
