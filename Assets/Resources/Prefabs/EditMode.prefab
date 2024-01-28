@@ -85,10 +85,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Top: 30
+    m_Bottom: 30
   m_ChildAlignment: 4
-  m_Spacing: 80
+  m_Spacing: 50
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc1142b3914776429b85a7a68d6a886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   editActionMap: EditMode
   gameActionMap: General
   editGlobalRoot: {fileID: 1321199506942261894}
@@ -389,10 +389,22 @@ MonoBehaviour:
     uiObject: {fileID: 0}
     graphicPrefab: {fileID: 2730534889815923725, guid: 6aaa73da7cdf76e4daab0cc8eb02c932,
       type: 3}
-    uiPrefab: {fileID: 3867891204845361139, guid: 3f6acfcd377dc864fb03443df58c1908,
+    uiPrefab: {fileID: 1071319310130996525, guid: 3b947ea87579a7c4492716ffc2d8c711,
+      type: 3}
+  - id: 0
+    uiObject: {fileID: 0}
+    graphicPrefab: {fileID: 6085613785733282385, guid: 5000da5155a5d5848825fecc0d64e68e,
+      type: 3}
+    uiPrefab: {fileID: 2186707461082655117, guid: 7ede98f7a509fbd449c6215c79036e97,
+      type: 3}
+  - id: 0
+    uiObject: {fileID: 0}
+    graphicPrefab: {fileID: 4631005474570512478, guid: 80722a4a0b45e4143a48335f6726b0a5,
+      type: 3}
+    uiPrefab: {fileID: 75827137821367885, guid: 25f644c73da04924db3615d4e3a6f0f4,
       type: 3}
   chooseUIRoot: {fileID: 402615121930479729}
-  chooseObjectCount: {x: 2, y: 3}
+  chooseObjectCount: {x: 5, y: 8}
 --- !u!114 &706447517814294550
 MonoBehaviour:
   m_ObjectHideFlags: 0
