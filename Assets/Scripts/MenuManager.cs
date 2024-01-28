@@ -9,4 +9,10 @@ public class MenuManager : MonoBehaviour
     {
         AudioBridge.PlayMusic("Music/JMJ");
     }
+
+    public void ButtonSound()
+    {
+        AudioBridge.PlaySFX("sfx/pop");
+
+    }
 }
