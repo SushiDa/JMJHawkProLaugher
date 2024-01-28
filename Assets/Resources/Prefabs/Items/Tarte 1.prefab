@@ -103,10 +103,10 @@ MonoBehaviour:
   ItemCategory: Tarte
   SFXOnInteract: Tarte
   InteractTimeBonus: 0
-  MultiplierBonus: 0
-  PerfectMultiplierBonus: 0
-  PointBonus: 0
-  PerfectPointBonus: 0
+  MultiplierBonus: 2
+  PerfectMultiplierBonus: 3
+  PointBonus: 10
+  PerfectPointBonus: 20
   LinkedItem: {fileID: 0}
 --- !u!1 &8865515133383171220
 GameObject:

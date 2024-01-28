@@ -73,10 +73,11 @@ MonoBehaviour:
   ItemCategory: 
   SFXOnInteract: Banane
   InteractTimeBonus: 0
-  MultiplierBonus: 0
-  PerfectMultiplierBonus: 0
-  PointBonus: 0
-  PerfectPointBonus: 0
+  MultiplierBonus: 1
+  PerfectMultiplierBonus: 1
+  PointBonus: 50
+  PerfectPointBonus: 100
+  LinkedItem: {fileID: 0}
   SlideSpeed: 10
   SlideDuration: 1.5
   SlidePerfectTiming: {x: 0.75, y: 0.9}
