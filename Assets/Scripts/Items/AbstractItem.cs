@@ -18,6 +18,8 @@ public abstract class AbstractItem : MonoBehaviour
     [SerializeField] internal int PointBonus;
     [SerializeField] internal int PerfectPointBonus;
 
+    [SerializeField] internal AbstractItem LinkedItem;
+
     internal bool Triggered;
     internal bool IsActive;
 
