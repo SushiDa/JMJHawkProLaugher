@@ -9,6 +9,7 @@ public class Banana : AbstractItem
     [SerializeField] private Vector2 SlidePerfectTiming;
     [SerializeField] private GameObject NormalBanana;
     [SerializeField] private GameObject SqaushedBanana;
+    private Public foule = null;
 
     private float currentSlideTimer;
 
@@ -17,6 +18,12 @@ public class Banana : AbstractItem
         initialPosition = transform.localPosition;
         initialParent = transform.parent;
     }
+
+    private void Start()
+    {
+        foule = GameObject.FindGameObjectWithTag("Public").GetComponent<Public>();
+    }
+
     internal override bool CanInteractImpl(PlayerGameController player)
     {
         PlayerDirection direction = player.InputHub.ReadPlayerDirection();
@@ -40,6 +47,9 @@ public class Banana : AbstractItem
             InteractingPlayer.rigidbody.MoveRotation(Quaternion.identity);
             // ChangeAnimSlide
             InteractingPlayer.animator.SetBool("ZwipBanana", true);
+            if(foule != null)
+                foule.publicEnDelire();
+
             switch (InteractingPlayer.InputHub.ReadPlayerDirection())
             {
                 case PlayerDirection.FOOT:
