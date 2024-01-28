@@ -344,6 +344,8 @@ MonoBehaviour:
   footTransform: {fileID: 8863837005084418200}
   handTransform: {fileID: 7039616580134409042}
   headTransform: {fileID: 3882575353906071492}
+  animator: {fileID: 8222810822961792238}
+  armature: {fileID: 4771890847014515014}
 --- !u!114 &5099713575623526263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,6 +692,18 @@ PrefabInstance:
 --- !u!4 &4506410132327309784 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3021874259125613602, guid: 6d78182a6865e3c42b109934643fac48,
+    type: 3}
+  m_PrefabInstance: {fileID: 1686077456299267578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4771890847014515014 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6151653149103875260, guid: 6d78182a6865e3c42b109934643fac48,
+    type: 3}
+  m_PrefabInstance: {fileID: 1686077456299267578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8222810822961792238 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7312557596372832532, guid: 6d78182a6865e3c42b109934643fac48,
     type: 3}
   m_PrefabInstance: {fileID: 1686077456299267578}
   m_PrefabAsset: {fileID: 0}

@@ -87,6 +87,7 @@ public class Banana : AbstractItem
     {
         NormalBanana.SetActive(false);
         SqaushedBanana.SetActive(false);
+        Destroy(gameObject, 1);
         InteractingPlayer.animator.SetBool("ZwipBanana", false);
         if (InteractingPlayer != null)
         {
