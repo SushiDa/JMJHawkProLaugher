@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Canon : AbstractItem
 {
+    [SerializeField] internal GameObject projectile;
 
     private float shotDelayTimer;
     private bool isFiring = false;
@@ -22,16 +23,20 @@ public class Canon : AbstractItem
     void Update()
     {
         
-        if (isFiring && shotDelayTimer < 2) 
+        if (isFiring && shotDelayTimer < 1) 
         {
             shotDelayTimer += Time.deltaTime;
-            if (shotDelayTimer >= 2) 
+            if (shotDelayTimer >= 1) 
             {
                 isFiring = false;
                 shotDelayTimer = 0;
                 AudioBridge.PlaySFX("Canon");
                 //Animation du tir
-                //Create a TARTE
+
+                //Create projectile and add speed
+                GameObject tarte = Instantiate(projectile, transform.position, Quaternion.identity);
+                tarte.GetComponent<Rigidbody>().velocity = new Vector3(-10, 10, 0);
+                tarte.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.up, Vector3.left);
             }
             
         }
