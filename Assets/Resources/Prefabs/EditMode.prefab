@@ -284,13 +284,7 @@ MonoBehaviour:
   objectsMappings:
   - id: 0
     uiObject: {fileID: 0}
-    graphicPrefab: {fileID: 2681227691417997879, guid: 93d805802e5ddbd4694a0ef1b3cbfbc2,
-      type: 3}
-    uiPrefab: {fileID: 3867891204845361139, guid: 3f6acfcd377dc864fb03443df58c1908,
-      type: 3}
-  - id: 0
-    uiObject: {fileID: 0}
-    graphicPrefab: {fileID: 4972415815209762827, guid: d8d5dca51c7036c428feef9fca9d4fa4,
+    graphicPrefab: {fileID: 6520461308299301979, guid: c5ab0fdcd18f3034d847961d56823446,
       type: 3}
     uiPrefab: {fileID: 3867891204845361139, guid: 3f6acfcd377dc864fb03443df58c1908,
       type: 3}

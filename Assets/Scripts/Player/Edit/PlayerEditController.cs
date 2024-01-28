@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -30,7 +31,7 @@ public class PlayerEditController : MonoBehaviour
 
 
 
-
+    [SerializeField] bool debug = true;
     [Header("Action Maps")]
     [SerializeField]
     private string editActionMap = "EditMode";
@@ -133,6 +134,7 @@ public class PlayerEditController : MonoBehaviour
             // Instantiate Mapping UI Button, and assign him his ID
             GameObject uiObject = Instantiate(currentMappings[i].uiPrefab, chooseUIRoot);
             uiObject.GetComponent<ChooseObjectButton>().ID = currentMappings[i].id;
+            uiObject.GetComponentInChildren<TMP_Text>().text = currentMappings[i].graphicPrefab.GetComponent<ItemPreview>().Title;
             if (i == 0) EventSystem.current.SetSelectedGameObject(uiObject);
             currentMappings[i].uiObject = uiObject;
         }
@@ -170,7 +172,14 @@ public class PlayerEditController : MonoBehaviour
 
     private void PlayGame()
     {
-        editGlobalRoot.SetActive(false);
-        gameGlobalRoot.SetActive(true);
+        if (debug)
+        {
+            editGlobalRoot.SetActive(false);
+            gameGlobalRoot.SetActive(true);
+        }
+        else
+        {
+            GameEvents.EditItemEnd?.Invoke();
+        }
     }
 }

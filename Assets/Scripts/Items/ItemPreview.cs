@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemPreview : MonoBehaviour
 {
     [SerializeField] private AbstractItem ItemPrefab;
+    [SerializeField] internal string Title;
     internal ItemPreview NextItem;
 
     internal bool IsNextMultipart;
@@ -14,9 +15,14 @@ public class ItemPreview : MonoBehaviour
         if (!IsNextMultipart || force)
         {
             var item = Instantiate(ItemPrefab, transform.position, transform.rotation);
+            if(parentItem != null)
+            {
+                parentItem.LinkedItem = item;
+            }
             if (NextItem != null)
             {
                 NextItem.SpawnItem(force: true, parentItem: item);
+
             }
         }
     }

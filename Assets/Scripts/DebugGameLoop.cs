@@ -9,12 +9,14 @@ public class DebugGameLoop : MonoBehaviour
 {
     [SerializeField] TMP_Text Text;
     [SerializeField] TMP_Text Counter;
+    [SerializeField] GameObject EditGameObject;
 
     private void Awake()
     {
         Text.text = "";
         Counter.text = "";
         GameEvents.IntroStart += Intro;
+        GameEvents.EditItemStart += Edit;
         GameEvents.WaveIntroStart += WaveIntro;
         GameEvents.GameOver += GameOver;
     }
@@ -22,6 +24,7 @@ public class DebugGameLoop : MonoBehaviour
     private void OnDestroy()
     {
         GameEvents.IntroStart -= Intro;
+        GameEvents.EditItemStart -= Edit;
         GameEvents.WaveIntroStart -= WaveIntro;
         GameEvents.GameOver -= GameOver;
     }
@@ -49,7 +52,8 @@ public class DebugGameLoop : MonoBehaviour
 
     private async void Edit()
     {
-        await DebugGameState("Edit", EndEdit);
+        EditGameObject.SetActive(true);
+        //await DebugGameState("Edit", EndEdit);
     }
 
     private void EndEdit()
