@@ -49,13 +49,15 @@ MonoBehaviour:
   CancellableLongInteraction: 0
   AvailableCancelActions: 
   ItemCategory: 
-  SFXOnInteract: 
+  SFXOnInteract: Meche
   InteractTimeBonus: 0
   MultiplierBonus: 0
   PerfectMultiplierBonus: 0
   PointBonus: 0
   PerfectPointBonus: 0
   LinkedItem: {fileID: 0}
+  projectile: {fileID: 3303200925325461647, guid: a16209d97c6be084ebc32176a9762d1d,
+    type: 3}
 --- !u!1 &1134709259946047969
 GameObject:
   m_ObjectHideFlags: 0
