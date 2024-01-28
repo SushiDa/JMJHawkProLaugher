@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tarte : AbstractItem
 {
-
+    private Public foule = null;
 
     internal override bool CanInteractImpl(PlayerGameController player)
     {
@@ -18,6 +18,11 @@ public class Tarte : AbstractItem
             // Animation de tarte dans tête
 
             InteractingPlayer.animator.CrossFadeNicely("Armature|tarteTaguele", 0);
+            foule = GameObject.FindGameObjectWithTag("Public").GetComponent<Public>();
+            if (foule != null)
+                foule.publicEnDelire();
+            else
+                Debug.Log("Pas De Foule");
             //Si le joueur est au sol, trick
             if (InteractingPlayer.InputHub.ReadIsGrounded())
             {
