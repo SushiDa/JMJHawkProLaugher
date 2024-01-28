@@ -17,7 +17,7 @@ public class Public : MonoBehaviour
             // Si un composant Animator est trouvé, lancer la transition
             if (childAnimator != null)
             {
-                childAnimator.CrossFadeNicely("Armature|HeadBang", 0);
+                childAnimator.CrossFadeNicely("Armature|HeadBang    ", 0);
             }
         }
     }

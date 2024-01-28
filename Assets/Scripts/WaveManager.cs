@@ -1,4 +1,4 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,10 +12,23 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private TMP_Text PromptText;
 
+    [SerializeField]
+    private Transform circleSpawnReference;
+    [SerializeField]
+    private GameObject circlePrefab;
+
     internal int WaveNumber;
     internal float CurrentWaveTimer;
+    private bool WaveStarted;
+    private GameObject currentCircle;
 
-    bool WaveStarted;
+    private new Camera camera;
+    public Camera Camera { 
+        get {
+            if (camera == null) camera = Camera.main;
+            return camera;
+        }
+    }
 
     private void Awake()
     {
@@ -39,19 +52,11 @@ public class WaveManager : MonoBehaviour
         WaveStarted = false;
 
         // Spawn all items
-        foreach (var spawner in FindObjectsOfType<ItemPreview>(true))
-        {
-            spawner.gameObject.SetActive(true);
-        }
+        foreach (var spawner in FindObjectsOfType<ItemPreview>(true)) spawner.gameObject.SetActive(true);
+        foreach (var item in FindObjectsOfType<AbstractItem>(true)) Destroy(item.gameObject);
 
-        foreach (var item in FindObjectsOfType<AbstractItem>(true))
-        {
-            Destroy(item.gameObject);
-        }
         var player = FindObjectOfType<PlayerGameController>(true);
-
-        if(player != null)
-            Destroy(player.gameObject);
+        if(player != null) Destroy(player.gameObject);
 
         //TODO timer en fonction de la wave courante
         CurrentWaveTimer = WaveStartTimer;
@@ -61,12 +66,29 @@ public class WaveManager : MonoBehaviour
     {
         // Coroutine de départ ici
         WaveStarted = true;
+
         // Spawn Player
-        Instantiate<PlayerGameController>(PlayerPrefab, PlayerSpawnPosition.position, PlayerSpawnPosition.rotation);
+        Instantiate(PlayerPrefab.gameObject, PlayerSpawnPosition.position, PlayerSpawnPosition.rotation);
+
+        // Spawn Flamme Circle
+        if (Camera != null && circlePrefab != null) {
+
+            // Reset previous round circle
+            if (currentCircle != null) {
+                Destroy(currentCircle);
+                currentCircle = null;
+            }
+
+            // Calculate position + Instantiate round circle
+            Vector2 circlePosition = new Vector2(Random.value, Random.value);
+            Vector3 refPosition = Camera.WorldToViewportPoint(circleSpawnReference.position);
+            Vector3 viewPosition = new Vector3(circlePosition.x, circlePosition.y, refPosition.z);
+            Vector3 resultPosition = Camera.ViewportToWorldPoint(viewPosition);
+            currentCircle = Instantiate(circlePrefab, resultPosition, Quaternion.identity);
+        }
 
         // Spawn all items
-        foreach(var spawner in FindObjectsOfType<ItemPreview>(true))
-        {
+        foreach(var spawner in FindObjectsOfType<ItemPreview>(true)) {
             spawner.SpawnItem();
             spawner.gameObject.SetActive(false);
         }
