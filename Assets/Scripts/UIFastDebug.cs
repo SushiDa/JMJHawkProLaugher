@@ -23,7 +23,7 @@ public class UIFastDebug : MonoBehaviour
     {
         player = FindObjectOfType<PlayerScoring>(true);
         playerCtrl = FindObjectOfType<PlayerGameController>(true);
-        if (player != null)
+        if (player != null && playerCtrl != null)
             DebugText.text = "Score : " + player.CurrentScore.ToString("000") + " | " + player.CurrentTricks.Count + " tricks<br>Combo : x" + player.CurrentMultiplier.ToString("0") + " | " + player.CurrentComboTimer.ToString("0.0") + "s<br>Wave : " + wave.WaveNumber + " | " + wave.CurrentWaveTimer + "s<br> yVelocity : " + playerCtrl.rigidbody.velocity.y.ToString("0.00");
         else
             DebugText.text = "";
