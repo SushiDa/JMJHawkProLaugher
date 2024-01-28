@@ -7,7 +7,7 @@ public class PlayerScoring : MonoBehaviour
 {
     internal int CurrentScore;
     internal int CurrentMultiplier;
-    internal List<Trick> CurrentTricks;
+    internal List<Trick> CurrentTricks = new List<Trick>();
 
     [SerializeField] internal float MaxComboTimer;
     [SerializeField] internal float ComboTimerIncrement;
@@ -44,12 +44,17 @@ public class PlayerScoring : MonoBehaviour
 
     private void RegisterScoreBonus(int Score, int Multiplier, float TimeBonus, Trick trick)
     {
-        if (CurrentTricks.Find(t => t.ItemSource == trick.ItemSource && t.Direction == trick.Direction).ItemSource != "")
+        if (CurrentTricks.Find(t => t.ItemSource == trick.ItemSource && t.Direction == trick.Direction && t.Modifier == trick.Modifier).ItemSource != "")
         {
             CurrentMultiplier += Multiplier;
         }
         CurrentTricks.Add(trick);
         CurrentScore += Score * CurrentMultiplier;
+
+        if (trick.IsSuperTrick)
+            AudioBridge.PlaySFX("SuperTrick");
+        else
+            AudioBridge.PlaySFX("Trick");
 
         if(CurrentComboTimer > 0)
         {
@@ -59,7 +64,6 @@ public class PlayerScoring : MonoBehaviour
         {
             CurrentComboTimer = MaxComboTimer;
         }
-        
     }
 
     private void Update()
@@ -89,6 +93,8 @@ public struct Trick
 {
     public string ItemSource;
     public PlayerDirection Direction;
+    public string Modifier;
+    public bool IsSuperTrick;
 }
 
 public enum PlayerDirection

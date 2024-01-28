@@ -7,6 +7,8 @@ public class Banana : AbstractItem
     [SerializeField] private float SlideSpeed;
     [SerializeField] private float SlideDuration;
     [SerializeField] private Vector2 SlidePerfectTiming;
+    [SerializeField] private GameObject NormalBanana;
+    [SerializeField] private GameObject SqaushedBanana;
 
     private float currentSlideTimer;
 
@@ -20,15 +22,45 @@ public class Banana : AbstractItem
     {
         if(InteractingPlayer != null)
         {
-            GetComponent<MeshRenderer>().material.color = Color.red;
             transform.parent = InteractingPlayer.FootTransform;
             transform.localPosition = Vector3.zero;
             
             InteractingPlayer.MovementLocked = true;
             InteractingPlayer.InteractLocked = true;
             InteractingPlayer.JumpLocked = false;
+
+            NormalBanana.SetActive(false);
+            SqaushedBanana.SetActive(true);
             // Le perso glisse en avant
             InteractingPlayer.rb.velocity = Vector3.right * SlideSpeed * Mathf.Sign(InteractingPlayer.GetComponent<Rigidbody>().velocity.x);
+
+            // ChangeAnimSlide
+            switch(InteractingPlayer.GetCurrentDirection())
+            {
+                case PlayerDirection.FOOT:
+                    // Normal stuff
+                    Trick trick = new Trick
+                    {
+                        Direction = PlayerDirection.FOOT,
+                        ItemSource = ItemCategory,
+                        IsSuperTrick = false
+                    };
+                    GameEvents.ScoreBonus?.Invoke(PointBonus, MultiplierBonus, InteractTimeBonus, trick);
+                    break;
+                case PlayerDirection.HAND:
+                    // RAD stuff
+                    Trick supertrick = new Trick
+                    {
+                        Direction = PlayerDirection.HAND,
+                        ItemSource = ItemCategory,
+                        IsSuperTrick = true
+                    };
+                    GameEvents.ScoreBonus?.Invoke(PointBonus, MultiplierBonus, InteractTimeBonus, supertrick);
+                    break;
+                default:
+
+                    break;
+            }
             return true;
         }
         return false;
@@ -48,7 +80,8 @@ public class Banana : AbstractItem
 
     protected override void CancelImpl()
     {
-        GetComponent<MeshRenderer>().enabled = false;
+        NormalBanana.SetActive(false);
+        SqaushedBanana.SetActive(false);
 
         if (InteractingPlayer != null)
         {
@@ -60,13 +93,8 @@ public class Banana : AbstractItem
 
     protected override void ResetImpl()
     {
-        GetComponent<MeshRenderer>().material.color = Color.white;
-        GetComponent<MeshRenderer>().enabled = true;
+        NormalBanana.SetActive(true);
+        SqaushedBanana.SetActive(false);
         currentSlideTimer = 0;
-    }
-
-    protected override void HoverImpl(bool hovering)
-    {
-        GetComponent<MeshRenderer>().material.color = hovering ? Color.yellow : Color.white;
     }
 }

@@ -6,9 +6,11 @@ using UnityEngine.Events;
 
 public abstract class AbstractItem : MonoBehaviour
 {
-    [SerializeField] private List<ItemCancelTypes> AvailableCancelActions;
-    [SerializeField] private string SFXOnInteract;
+    [SerializeField] protected List<ItemCancelTypes> AvailableCancelActions;
+    [SerializeField] protected string ItemCategory;
+    [SerializeField] protected string SFXOnInteract;
 
+    [SerializeField] internal float InteractTimeBonus;
     [SerializeField] internal int MultiplierBonus;
     [SerializeField] internal int PerfectMultiplierBonus;
     [SerializeField] internal int PointBonus;
