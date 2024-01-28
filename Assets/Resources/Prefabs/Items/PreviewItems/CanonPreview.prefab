@@ -367,3 +367,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemPrefab: {fileID: 3993121840009269899, guid: 878c782ef2334674d9e16ce060a6a10e,
     type: 3}
+  Title: Canon

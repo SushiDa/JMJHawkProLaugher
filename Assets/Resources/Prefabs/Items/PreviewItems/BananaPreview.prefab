@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemPrefab: {fileID: 9025470527368563306, guid: a74fb9055f6db524fb07cf4e11fbf2b0,
     type: 3}
+  Title: Banana
 --- !u!1 &7858524254403348904
 GameObject:
   m_ObjectHideFlags: 0

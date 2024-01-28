@@ -92,7 +92,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4159057304755047060}
-  - component: {fileID: 2872587388504006527}
   - component: {fileID: 1745469707640414538}
   m_Layer: 0
   m_Name: TrampolinePreview
@@ -119,27 +118,6 @@ Transform:
   - {fileID: 8767872968878638570}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2872587388504006527
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4631005474570512478}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 756580a000dda1746a4d957ab19d249b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1745469707640414538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemPrefab: {fileID: 3916403148603464596, guid: da8be9db494ac2148838d8a1d4f331c0,
     type: 3}
+  Title: Trampoline
 --- !u!1 &5644663312233698930
 GameObject:
   m_ObjectHideFlags: 0
