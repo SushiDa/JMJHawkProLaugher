@@ -362,7 +362,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTags:
   - Untagged
-  failFxPrefab: {fileID: 0}
+  failFxPrefab: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55,
+    type: 3}
 --- !u!114 &5099713575623526263
 MonoBehaviour:
   m_ObjectHideFlags: 0
