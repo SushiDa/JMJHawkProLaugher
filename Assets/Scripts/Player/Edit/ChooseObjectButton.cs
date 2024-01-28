@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [DisallowMultipleComponent]
 public class ChooseObjectButton : MonoBehaviour
@@ -16,6 +17,12 @@ public class ChooseObjectButton : MonoBehaviour
             if (playerEditController == null) playerEditController = FindObjectOfType<PlayerEditController>(includeInactive: true);
             return playerEditController;
         }
+    }
+
+    void OnEnable()
+    {
+        if (EventSystem.current == null) return;
+        EventSystem.current.SetSelectedGameObject(gameObject);
     }
 
     public void OnClick()

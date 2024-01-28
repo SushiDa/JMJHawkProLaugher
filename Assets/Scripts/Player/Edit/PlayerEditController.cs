@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(PlayerPlaceController))]
@@ -135,7 +134,6 @@ public class PlayerEditController : MonoBehaviour
             GameObject uiObject = Instantiate(currentMappings[i].uiPrefab, chooseUIRoot);
             uiObject.GetComponent<ChooseObjectButton>().ID = currentMappings[i].id;
             uiObject.GetComponentInChildren<TMP_Text>().text = currentMappings[i].graphicPrefab.GetComponent<ItemPreview>().Title;
-            if (i == 0) EventSystem.current.SetSelectedGameObject(uiObject);
             currentMappings[i].uiObject = uiObject;
         }
     }

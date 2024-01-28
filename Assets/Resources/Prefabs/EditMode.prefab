@@ -305,7 +305,7 @@ MonoBehaviour:
   placeKeeper: {fileID: 0}
   placeCursor: {fileID: 5459986763791250509}
   moveSpeed: 1
-  rotationSpeed: 1
+  rotationSpeed: 250
 --- !u!1 &3615616861852907573
 GameObject:
   m_ObjectHideFlags: 0
