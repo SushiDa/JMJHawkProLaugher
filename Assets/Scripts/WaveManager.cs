@@ -51,6 +51,11 @@ public class WaveManager : MonoBehaviour
         WaveNumber++;
         WaveStarted = false;
 
+        var playerInput = FindObjectOfType<PlayerInputHub>(true);
+        playerInput.CanMove = true;
+        playerInput.CanJump = true;
+        playerInput.CanRotate = true;
+
         // Spawn all items
         foreach (var spawner in FindObjectsOfType<ItemPreview>(true)) spawner.gameObject.SetActive(true);
         foreach (var item in FindObjectsOfType<AbstractItem>(true)) Destroy(item.gameObject);
