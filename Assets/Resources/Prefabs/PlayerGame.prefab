@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 7365591685432492349}
   - component: {fileID: 2125976579458227233}
   - component: {fileID: 4302043680011488269}
+  - component: {fileID: 8850483851608602329}
   - component: {fileID: 5099713575623526263}
   - component: {fileID: 3236374944988900104}
   - component: {fileID: 5817889870263758274}
@@ -347,6 +348,21 @@ MonoBehaviour:
   headTransform: {fileID: 3882575353906071492}
   animator: {fileID: 8222810822961792238}
   armature: {fileID: 4771890847014515014}
+--- !u!114 &8850483851608602329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4166940280378269652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30cfbc8f1fb3dfa4eb27716b415bc0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundTags:
+  - Untagged
+  failFxPrefab: {fileID: 0}
 --- !u!114 &5099713575623526263
 MonoBehaviour:
   m_ObjectHideFlags: 0
