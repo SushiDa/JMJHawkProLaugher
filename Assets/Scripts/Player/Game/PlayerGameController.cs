@@ -25,6 +25,10 @@ public class PlayerGameController : MonoBehaviour
     internal Transform HeadTransform => headTransform;
 
     internal new Rigidbody rigidbody { get; private set; }
+    //Deso moi je code pas aussi beau
+    public Animator animator;
+    public Transform armature;
+    private Quaternion eulerRotation;
 
     private PlayerInputHub inputHub;
     public PlayerInputHub InputHub { 
@@ -84,6 +88,7 @@ public class PlayerGameController : MonoBehaviour
         OverrideVerticalVelocity(0f);
         rigidbody.AddForce(FixedOrientator.up * jumpforce, ForceMode.Impulse);
         GameEvents.PlayerJump?.Invoke();
+        animator.SetInteger("JumpingState", 1);
     }
 
 
@@ -117,6 +122,20 @@ public class PlayerGameController : MonoBehaviour
         Vector3 orientedVelocity = FixedOrientator.worldToLocalMatrix.MultiplyVector(rigidbody.velocity);
         orientedVelocity.x = speededMove;
         rigidbody.velocity = FixedOrientator.localToWorldMatrix.MultiplyVector(orientedVelocity);
+        if (inputMove != 0)
+        {
+            animator.SetBool("isMoving", true);
+            if (inputMove < 0) { 
+                eulerRotation = Quaternion.Euler(0, 180, 0);
+                transform.rotation = eulerRotation;
+            }
+            else if (inputMove > 0){
+                eulerRotation = Quaternion.Euler(0, 0, 0);
+                transform.rotation = eulerRotation;
+            }
+        }
+        else
+            animator.SetBool("isMoving", false);
     }
 
 
@@ -139,6 +158,10 @@ public class PlayerGameController : MonoBehaviour
         if (!isGrounded && isFalling) {
             Vector3 gravityForce = -FixedOrientator.up * fallForce;
             rigidbody.AddForce(gravityForce, ForceMode.Force);
+        }
+        else
+        {
+            animator.SetInteger("JumpingState", 0);
         }
     }
 
