@@ -41,7 +41,7 @@ public class PlayerProximityInteract : MonoBehaviour
     {
         CancelActiveItem(false, ItemCancelTypes.JUMP);
     }
-    private void CancelActiveItem(bool force, ItemCancelTypes cancelType)
+    internal void CancelActiveItem(bool force, ItemCancelTypes cancelType)
     {
         List<AbstractItem> itemsToCancel = new List<AbstractItem>();
         foreach (var activeItem in activeItems)

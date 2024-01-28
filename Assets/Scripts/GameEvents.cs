@@ -14,6 +14,7 @@ public static class GameEvents
     internal static Action<bool> WaveFinished; // Success
     internal static Action GameOver;
 
+    internal static Action<PlayerDirection> playerFallFail;
     internal static Action PlayerInteract;
     internal static Action PlayerJump;
     internal static Action<int, int, float, Trick> ScoreBonus; // score, multiplier, timeBonus, Trick

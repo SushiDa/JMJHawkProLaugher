@@ -161,6 +161,7 @@ MonoBehaviour:
   PerfectPointBonus: 100
   MinMaxUpVelocity: {x: 12.75, y: 16}
   UpVelocityMultiplier: 0.5
+  animator: {fileID: 6802463912583773287}
 --- !u!65 &3821731453744186504
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -9,28 +9,29 @@ public class DebugGameLoop : MonoBehaviour
 {
     [SerializeField] TMP_Text Text;
     [SerializeField] TMP_Text Counter;
+    [SerializeField] GameObject EditGameObject;
 
     private void Awake()
     {
         Text.text = "";
         Counter.text = "";
         GameEvents.IntroStart += Intro;
-        GameEvents.WaveIntroStart += WaveIntro;
         GameEvents.EditItemStart += Edit;
+        GameEvents.WaveIntroStart += WaveIntro;
         GameEvents.GameOver += GameOver;
     }
 
     private void OnDestroy()
     {
         GameEvents.IntroStart -= Intro;
-        GameEvents.WaveIntroStart -= WaveIntro;
         GameEvents.EditItemStart -= Edit;
+        GameEvents.WaveIntroStart -= WaveIntro;
         GameEvents.GameOver -= GameOver;
     }
 
     private async void Intro()
     {
-        await DebugGameState("Intro", EndIntro);
+        await DebugGameState("WELCOME JMJ !", EndIntro);
     }
 
     private void EndIntro()
@@ -40,8 +41,8 @@ public class DebugGameLoop : MonoBehaviour
 
     private async void WaveIntro()
     {
-
-        await DebugGameState("Wave Intro", EndWaveIntro);
+        WaveManager wave = FindObjectOfType<WaveManager>();
+        await DebugGameState("Wave " + wave.WaveNumber, EndWaveIntro);
     }
 
     private void EndWaveIntro()
@@ -51,7 +52,8 @@ public class DebugGameLoop : MonoBehaviour
 
     private async void Edit()
     {
-        await DebugGameState("Edit", EndEdit);
+        EditGameObject.SetActive(true);
+        //await DebugGameState("Edit", EndEdit);
     }
 
     private void EndEdit()

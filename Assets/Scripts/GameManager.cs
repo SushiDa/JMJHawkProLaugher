@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private GameState State = GameState.INTRO;
+    [SerializeField] GameObject EditModeObject;
     private void Awake()
     {
         GameEvents.IntroEnd += StartWaveIntro;
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
     {
         if (State != GameState.EDIT) return;
         State = GameState.GAMING;
+        EditModeObject.SetActive(false);
         GameEvents.WaveStart?.Invoke();
     }
 
