@@ -90,3 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WaveStartTimer: 15
+  PlayerPrefab: {fileID: 4302043680011488269, guid: 79f64b46bdf77be459fc6af8289d3ef7,
+    type: 3}
+  PlayerSpawnPosition: {fileID: 0}
+  PromptText: {fileID: 0}

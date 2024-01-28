@@ -48,9 +48,10 @@ public class WaveManager : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+        var player = FindObjectOfType<PlayerGameController>(true);
 
-        Destroy(FindObjectOfType<PlayerGameController>(true).gameObject);
-
+        if(player != null)
+            Destroy(player.gameObject);
 
         //TODO timer en fonction de la wave courante
         CurrentWaveTimer = WaveStartTimer;
