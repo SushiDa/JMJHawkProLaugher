@@ -19,6 +19,7 @@ public class PlayerPlaceController : MonoBehaviour
     private GameObject placeVisual;
 
     private PlayerInputHub inputHub;
+    private ItemPreview currentMultipartParent;
     public PlayerInputHub InputHub { 
         get {
             if (inputHub == null) inputHub = FindObjectOfType<PlayerInputHub>();
@@ -91,6 +92,14 @@ public class PlayerPlaceController : MonoBehaviour
         if (!isConfirm || placeVisual == null) return;
         placeVisual.transform.SetParent(placeKeeper, true);
         
+        ItemPreview preview = placeVisual.GetComponent<ItemPreview>();
+        
+        
+        if(currentMultipartParent != null  && preview != null)
+        {
+            currentMultipartParent.NextItem = preview;
+        }
+
         // Go to Next part if there is one
         if (placeVisual.TryGetComponent(out ObjectMultiPart multipart) && multipart.NextGraphicPrefab != null) {
             placeVisual = null;
@@ -101,11 +110,14 @@ public class PlayerPlaceController : MonoBehaviour
             if (!placeVisual.TryGetComponent(out ObjectMultiPart newMultipart)) newMultipart = placeVisual.AddComponent<ObjectMultiPart>();
             newMultipart.LinkedPrevious = multipart;
             multipart.LinkedNext = newMultipart;
-            
+            currentMultipartParent = preview;
+
+
         } else { // otherwise Exit
             placeVisual = null;
             isMultipleParts = false;
             editController.ConsumeEditing();
+            currentMultipartParent = null;
             Exit();
         }
     }

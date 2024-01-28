@@ -16,7 +16,6 @@ public class DebugGameLoop : MonoBehaviour
         Counter.text = "";
         GameEvents.IntroStart += Intro;
         GameEvents.WaveIntroStart += WaveIntro;
-        GameEvents.EditItemStart += Edit;
         GameEvents.GameOver += GameOver;
     }
 
@@ -24,13 +23,12 @@ public class DebugGameLoop : MonoBehaviour
     {
         GameEvents.IntroStart -= Intro;
         GameEvents.WaveIntroStart -= WaveIntro;
-        GameEvents.EditItemStart -= Edit;
         GameEvents.GameOver -= GameOver;
     }
 
     private async void Intro()
     {
-        await DebugGameState("Intro", EndIntro);
+        await DebugGameState("WELCOME JMJ !", EndIntro);
     }
 
     private void EndIntro()
@@ -40,8 +38,8 @@ public class DebugGameLoop : MonoBehaviour
 
     private async void WaveIntro()
     {
-
-        await DebugGameState("Wave Intro", EndWaveIntro);
+        WaveManager wave = FindObjectOfType<WaveManager>();
+        await DebugGameState("Wave " + wave.WaveNumber, EndWaveIntro);
     }
 
     private void EndWaveIntro()
