@@ -16,6 +16,7 @@ public class Tarte : AbstractItem
         if (InteractingPlayer != null)
         {
             // Animation de tarte dans tête
+
             InteractingPlayer.animator.CrossFadeNicely("Armature|tarteTaguele", 0);
             //Si le joueur est au sol, trick
             if (InteractingPlayer.InputHub.ReadIsGrounded())
@@ -38,6 +39,7 @@ public class Tarte : AbstractItem
                 };
                 GameEvents.ScoreBonus?.Invoke(PerfectPointBonus, PerfectMultiplierBonus, InteractTimeBonus, supertrick);
             }
+            Destroy(gameObject, 0.3f);
         }
     }
 

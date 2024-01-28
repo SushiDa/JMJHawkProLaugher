@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1681872755469275445}
   - component: {fileID: 5730664495135495470}
   - component: {fileID: 6428246676755113121}
+  - component: {fileID: -3312969545418395504}
+  - component: {fileID: 7907035962538996324}
   m_Layer: 0
   m_Name: RingFire
   m_TagString: Untagged
@@ -28,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000052154064, y: 6.441718e-10, z: -0.0000000066983703,
     w: 1}
-  m_LocalPosition: {x: -0, y: 3.48, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -112,3 +114,49 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &-3312969545418395504
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244023182061280661}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7907035962538996324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244023182061280661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eefe2514a09dc764092d6cdc8599df52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CancelPreviousItems: 0
+  CancellableLongInteraction: 0
+  AvailableCancelActions: 
+  ItemCategory: 
+  SFXOnInteract: 
+  InteractTimeBonus: 2
+  MultiplierBonus: 1
+  PerfectMultiplierBonus: 1
+  PointBonus: 100
+  PerfectPointBonus: 100
+  LinkedItem: {fileID: 0}
