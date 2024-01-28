@@ -3,7 +3,22 @@ guid: 405d33f65c0cf87478299b3247502757
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlateformeCirque
+    second: {fileID: 2100000, guid: bc6015d2c0b522d49ab345fb4da4d944, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlateformeLight
+    second: {fileID: 2100000, guid: b4ab5b6530d76a74a9f896c26fff0709, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlateformeLight2
+    second: {fileID: 2100000, guid: 22a4450aae66a9846bededac255695bf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
