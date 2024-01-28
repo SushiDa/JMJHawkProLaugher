@@ -26,7 +26,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         State = GameState.INTRO;
-        // PlayMusicHere
+
+        AudioBridge.PlayMusic("Music/JMJ");
+
         if (GameEvents.IntroStart != null)
         {
             GameEvents.IntroStart();

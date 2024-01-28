@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        AudioBridge.PlayMusic("Music/JMJ");
+        AudioBridge.PlayMusic("Music/JMJ_Title");
     }
 
     public void ButtonSound()
     {
         AudioBridge.PlaySFX("sfx/pop");
-
     }
 }
