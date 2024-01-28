@@ -68,8 +68,10 @@ public class WaveManager : MonoBehaviour
         WaveStarted = true;
 
         // Spawn Player
-        Instantiate(PlayerPrefab.gameObject, PlayerSpawnPosition.position, PlayerSpawnPosition.rotation);
-
+        var player = Instantiate<PlayerGameController>(PlayerPrefab, PlayerSpawnPosition.position, PlayerSpawnPosition.rotation);
+        player.InputHub.CanMove = false;
+        player.InputHub.CanJump = false;
+        player.InputHub.CanRotate = false;
         // Spawn Flamme Circle
         if (Camera != null && circlePrefab != null) {
 
@@ -108,6 +110,12 @@ public class WaveManager : MonoBehaviour
         PromptText.text = "1";
         yield return new WaitForSeconds(.5f);
         PromptText.text = "GO !";
+
+        var player = FindObjectOfType<PlayerGameController>(true);
+        player.InputHub.CanMove = true;
+        player.InputHub.CanJump = true;
+        player.InputHub.CanRotate = true;
+
         yield return new WaitForSeconds(.5f);
         PromptText.text = "";
     }

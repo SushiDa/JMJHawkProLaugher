@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 46983aa3bdca4094aa128ff763bc30e3,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 46983aa3bdca4094aa128ff763bc30e3,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 46983aa3bdca4094aa128ff763bc30e3,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 46983aa3bdca4094aa128ff763bc30e3,
         type: 3}
@@ -72,6 +72,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 46983aa3bdca4094aa128ff763bc30e3,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7918335002988649766, guid: 46983aa3bdca4094aa128ff763bc30e3,
         type: 3}
@@ -159,6 +164,7 @@ MonoBehaviour:
   PerfectMultiplierBonus: 1
   PointBonus: 100
   PerfectPointBonus: 100
+  LinkedItem: {fileID: 0}
   MinMaxUpVelocity: {x: 12.75, y: 16}
   UpVelocityMultiplier: 0.5
   animator: {fileID: 6802463912583773287}

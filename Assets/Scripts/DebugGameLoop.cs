@@ -61,9 +61,11 @@ public class DebugGameLoop : MonoBehaviour
         GameEvents.EditItemEnd?.Invoke();
     }
 
-    private void GameOver()
+    private async void GameOver()
     {
         Text.text = "Game Over";
+        await Task.Delay(5000);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
     }
 
     private async Task DebugGameState(string text, Action callback)
