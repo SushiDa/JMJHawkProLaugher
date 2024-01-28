@@ -32,11 +32,12 @@ public class Canon : AbstractItem
                 shotDelayTimer = 0;
                 AudioBridge.PlaySFX("Canon");
                 //Animation du tir
-
+                //GetComponentInChildren<Animator>().SetBool("Armature|ArmatureAction", true);
                 //Create projectile and add speed
                 GameObject tarte = Instantiate(projectile, transform.position, Quaternion.identity);
                 tarte.GetComponent<Rigidbody>().velocity = new Vector3(-10, 10, 0);
                 tarte.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.up, Vector3.left);
+                Destroy(gameObject, 2.0f);
             }
             
         }
