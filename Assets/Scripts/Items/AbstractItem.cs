@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public abstract class AbstractItem : MonoBehaviour
 {
+    [SerializeField] internal bool CancelPreviousItems;
+    [SerializeField] internal bool CancellableLongInteraction;
     [SerializeField] protected List<ItemCancelTypes> AvailableCancelActions;
     [SerializeField] protected string ItemCategory;
     [SerializeField] protected string SFXOnInteract;
@@ -16,66 +18,45 @@ public abstract class AbstractItem : MonoBehaviour
     [SerializeField] internal int PointBonus;
     [SerializeField] internal int PerfectPointBonus;
 
-    internal Action HoverOnEvent;
-    internal Action HoverOffEvent;
-    internal Action ResetEvent;
-    internal Action cancelEvent;
-
     internal bool Triggered;
     internal bool IsActive;
 
     protected Vector2 initialPosition;
     protected Transform initialParent;
+    protected PlayerGameController InteractingPlayer;
 
-    protected SushiTestPlayer InteractingPlayer;
-
-    
-
-    internal bool Interact(SushiTestPlayer player)
+    internal bool CanInteract(PlayerGameController player) { 
+        return !Triggered && CanInteractImpl(player); 
+    }
+    internal virtual bool CanInteractImpl(PlayerGameController player) { return false; }
+    internal void Interact(PlayerGameController player)
     {
         if (!Triggered)
         {
             Triggered = true;
             IsActive = true;
             InteractingPlayer = player;
-            bool interacting = InteractImpl();
-            if (!interacting) CancelUse(); // if simple interaction, immediately cancel
+            InteractImpl();
             AudioBridge.PlaySFX(SFXOnInteract);
-            return interacting;
-        }
-        return false;
-    }
-
-    internal void Hover(bool hovering)
-    {
-        if (!Triggered)
-        {
-            if (hovering) HoverOnEvent?.Invoke();
-            else HoverOffEvent?.Invoke();
-            HoverImpl(hovering);
         }
     }
-
     internal void CancelUse()
     {
         IsActive = false;
-        cancelEvent?.Invoke();
         CancelImpl();
         ResetPositionAndParent();
+        InteractingPlayer?.GetComponent<PlayerProximityInteract>()?.RemoveActiveItem(this);
         InteractingPlayer = null;
     }
     internal void Reset()
     {
         IsActive = false;
-        ResetEvent?.Invoke();
         Triggered = false;
         ResetPositionAndParent();
+        InteractingPlayer?.GetComponent<PlayerProximityInteract>()?.RemoveActiveItem(this);
         InteractingPlayer = null;
     }
-
-    protected abstract bool InteractImpl();
-
-    protected virtual void HoverImpl(bool hovering) { }
+    protected abstract void InteractImpl(); // return true if item is held active
     protected virtual void ResetImpl() { }
     protected virtual void CancelImpl() { }
 
@@ -84,7 +65,6 @@ public abstract class AbstractItem : MonoBehaviour
         transform.parent = initialParent;
         transform.localPosition = initialPosition;
     }
-
     internal bool IsCancellable(ItemCancelTypes cancelType)
     {
         return AvailableCancelActions.Contains(cancelType);
@@ -93,6 +73,8 @@ public abstract class AbstractItem : MonoBehaviour
 
 public enum ItemCancelTypes
 {
-    JUMP = 0,
-    INTERACT = 1
+    NONE = 0,
+    JUMP = 1,
+    INTERACT = 2,
+    ITEM = 3,
 }

@@ -16,7 +16,15 @@ public class PlayerGameController : MonoBehaviour
     [SerializeField]
     private float fallForce = 1.5f;
 
-    private new Rigidbody rigidbody;
+    [SerializeField] private Transform footTransform;
+    [SerializeField] private Transform handTransform;
+    [SerializeField] private Transform headTransform;
+
+    internal Transform FootTransform => footTransform;
+    internal Transform HandTransform => handTransform;
+    internal Transform HeadTransform => headTransform;
+
+    internal new Rigidbody rigidbody { get; private set; }
 
     private PlayerInputHub inputHub;
     public PlayerInputHub InputHub { 
@@ -75,6 +83,7 @@ public class PlayerGameController : MonoBehaviour
         // Override Vertical Velocity + Apply Jump Force
         OverrideVerticalVelocity(0f);
         rigidbody.AddForce(FixedOrientator.up * jumpforce, ForceMode.Impulse);
+        GameEvents.PlayerJump?.Invoke();
     }
 
 
@@ -132,4 +141,5 @@ public class PlayerGameController : MonoBehaviour
             rigidbody.AddForce(gravityForce, ForceMode.Force);
         }
     }
+
 }

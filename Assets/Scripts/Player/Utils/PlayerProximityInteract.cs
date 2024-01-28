@@ -5,88 +5,59 @@ using UnityEngine.InputSystem;
 
 public class PlayerProximityInteract : MonoBehaviour
 {
-    private List<AbstractItem> _interactables = new List<AbstractItem>();
-    private SushiTestPlayer _player;
+    private PlayerGameController _player;
 
-    AbstractItem currentHover;
-    AbstractItem activeItem;
+    private List<AbstractItem> activeItems = new List<AbstractItem>();
 
     private void Awake()
     {
-        _player = GetComponent<SushiTestPlayer>();
+        _player = GetComponent<PlayerGameController>();
+        GameEvents.PlayerJump += OnJump;
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        float closestDistance = Mathf.Infinity;
-        AbstractItem hover = null;
-
-        foreach(var interact in _interactables)
-        {
-            float distance = Vector3.Distance(transform.position, interact.transform.position);
-            if (distance < closestDistance && !interact.Triggered) hover = interact;
-        }
-
-        if (hover != null && currentHover != hover)
-        {
-            currentHover = hover;
-            foreach (var interact in _interactables)
-                interact.Hover(interact == hover);
-        }
+        GameEvents.PlayerJump -= OnJump;
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.TryGetComponent(out AbstractItem interact))
+        if (collision.TryGetComponent(out AbstractItem item))
         {
-            _interactables.Add(interact);
-        }
-    }
-
-    private void OnTriggerExit(Collider collision)
-    {
-        if (collision.TryGetComponent(out AbstractItem interact))
-        {
-            _interactables.Remove(interact);
-            interact.Hover(false);
-            if (interact == currentHover) currentHover = null;
-        }
-    }
-
-    private void OnInteract(InputValue value)
-    {
-        if (value.isPressed && !_player.InteractLocked)
-        {
-            CancelActiveItem(false, ItemCancelTypes.INTERACT);
-
-            if(currentHover != null)
+            if (item.CanInteract(_player))
             {
-                CancelActiveItem(true, ItemCancelTypes.INTERACT);
-                currentHover.Interact(_player);
-                if(currentHover.IsActive)
-                    activeItem = currentHover;
+                if(item.CancelPreviousItems)
+                {
+                    CancelActiveItem(true, ItemCancelTypes.ITEM);
+                }
+
+                item.Interact(_player);
+                if (item.CancellableLongInteraction && item.IsActive) activeItems.Add(item);
             }
         }
     }
 
-    private void OnJump(InputValue value)
+    private void OnJump()
     {
-        if(value.isPressed && !_player.JumpLocked)
-        {
-            CancelActiveItem(false, ItemCancelTypes.JUMP);
-        }
+        CancelActiveItem(false, ItemCancelTypes.JUMP);
     }
-
     private void CancelActiveItem(bool force, ItemCancelTypes cancelType)
     {
-        if (activeItem != null && activeItem.IsActive && (force || activeItem.IsCancellable(cancelType)))
+        List<AbstractItem> itemsToCancel = new List<AbstractItem>();
+        foreach (var activeItem in activeItems)
         {
+            if (activeItem != null && activeItem.IsActive && (force || activeItem.IsCancellable(cancelType)))
+            {
+                itemsToCancel.Add(activeItem);
+            }
+        }
+        
+        foreach( var activeItem in itemsToCancel)
             activeItem.CancelUse();
-            activeItem = null;
-        }
-        else if(force)
-        {
-            activeItem = null;
-        }
+    }
+
+    internal void RemoveActiveItem(AbstractItem item)
+    {
+        activeItems.Remove(item);
     }
 }

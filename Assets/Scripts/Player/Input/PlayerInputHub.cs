@@ -193,7 +193,7 @@ public class PlayerInputHub : MonoBehaviour
         float rightDifference = Quaternion.Angle(detectorUp, absoluteRight);
 
         // Find wich direction correspond to our angle differences
-        if (upDifference <= 45f) return PlayerDirection.HAND; // UP
+        if (upDifference <= 45f) return PlayerDirection.HEAD; // UP
         else if (upDifference <= 135f && rightDifference <= 45f) return PlayerDirection.FRONT; // RIGHT
         else if (upDifference <= 135f && rightDifference > 45f) return PlayerDirection.BACK; // LEFT
         else return PlayerDirection.FOOT; // DOWN

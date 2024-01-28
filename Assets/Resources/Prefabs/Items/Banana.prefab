@@ -67,9 +67,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd62527a0e630914c87b8e0e3d0e931d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AvailableCancelActions: 00000000
+  CancelPreviousItems: 1
+  CancellableLongInteraction: 1
+  AvailableCancelActions: 01000000
   ItemCategory: 
-  SFXOnInteract: 
+  SFXOnInteract: Banane
   InteractTimeBonus: 0
   MultiplierBonus: 0
   PerfectMultiplierBonus: 0

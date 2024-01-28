@@ -17,25 +17,29 @@ public class Banana : AbstractItem
         initialPosition = transform.localPosition;
         initialParent = transform.parent;
     }
-
-    protected override bool InteractImpl()
+    internal override bool CanInteractImpl(PlayerGameController player)
+    {
+        PlayerDirection direction = player.InputHub.ReadPlayerDirection();
+        return direction == PlayerDirection.HEAD || direction == PlayerDirection.FOOT;
+    }
+    protected override void InteractImpl()
     {
         if(InteractingPlayer != null)
         {
             transform.parent = InteractingPlayer.FootTransform;
             transform.localPosition = Vector3.zero;
             
-            InteractingPlayer.MovementLocked = true;
-            InteractingPlayer.InteractLocked = true;
-            InteractingPlayer.JumpLocked = false;
+            InteractingPlayer.InputHub.CanMove = false;
+            InteractingPlayer.InputHub.CanRotate = false;
+            InteractingPlayer.InputHub.CanJump = true;
 
             NormalBanana.SetActive(false);
             SqaushedBanana.SetActive(true);
             // Le perso glisse en avant
-            InteractingPlayer.rb.velocity = Vector3.right * SlideSpeed * Mathf.Sign(InteractingPlayer.GetComponent<Rigidbody>().velocity.x);
-
+            InteractingPlayer.rigidbody.velocity = InteractingPlayer.FixedOrientator.right * SlideSpeed * Mathf.Sign(InteractingPlayer.GetComponent<Rigidbody>().velocity.x);
+            InteractingPlayer.rigidbody.MoveRotation(Quaternion.identity);
             // ChangeAnimSlide
-            switch(InteractingPlayer.GetCurrentDirection())
+            switch(InteractingPlayer.InputHub.ReadPlayerDirection())
             {
                 case PlayerDirection.FOOT:
                     // Normal stuff
@@ -47,11 +51,11 @@ public class Banana : AbstractItem
                     };
                     GameEvents.ScoreBonus?.Invoke(PointBonus, MultiplierBonus, InteractTimeBonus, trick);
                     break;
-                case PlayerDirection.HAND:
+                case PlayerDirection.HEAD:
                     // RAD stuff
                     Trick supertrick = new Trick
                     {
-                        Direction = PlayerDirection.HAND,
+                        Direction = PlayerDirection.HEAD,
                         ItemSource = ItemCategory,
                         IsSuperTrick = true
                     };
@@ -61,9 +65,9 @@ public class Banana : AbstractItem
 
                     break;
             }
-            return true;
+
+
         }
-        return false;
     }
 
     private void Update()
@@ -85,9 +89,9 @@ public class Banana : AbstractItem
 
         if (InteractingPlayer != null)
         {
-            InteractingPlayer.MovementLocked = false;
-            InteractingPlayer.InteractLocked = false;
-            InteractingPlayer.JumpLocked = false;
+            InteractingPlayer.InputHub.CanMove = true;
+            InteractingPlayer.InputHub.CanRotate = true;
+            InteractingPlayer.InputHub.CanJump = true;
         }
     }
 

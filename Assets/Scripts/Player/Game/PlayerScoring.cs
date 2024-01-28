@@ -103,5 +103,5 @@ public enum PlayerDirection
     FRONT,
     BACK,
     FOOT,
-    HAND
+    HEAD
 }
